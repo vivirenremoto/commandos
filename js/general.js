@@ -18,9 +18,11 @@ var walking_speed = 1;
 var eagle_speed = 10000;
 
 var music_start = false;
+var alarm_music_start = false;
 
 var screen_width = $(window).width();
 var screen_height = $(window).height();
+var is_mobile = screen_width < 480;
 
 var villager_walking_class = 'villager_walking';
 var eagle_flying_class = '';
@@ -31,7 +33,7 @@ var latest_key = [];
 
 
 // delimitar zonas para que los edificios no se sobrepongan
-if (screen_width < 480) {
+if (is_mobile) {
     var zones = [
         {
             start_x: 0,
@@ -111,6 +113,9 @@ function init() {
     // arrow controls
     document.onkeydown = function (e) {
 
+        if (is_alarm) return;
+
+
 
         if (e.which == 13) {
             if ($('#paper').is(':visible') == false) return;
@@ -164,6 +169,9 @@ function init() {
 
     document.onkeyup = function (e) {
 
+        if (is_alarm) return;
+
+
         if (latest_key.includes(13)) {
             $('#close').click();
         } else {
@@ -189,6 +197,35 @@ function init() {
     $('#canvas').click(function (e) {
 
 
+        if (is_alarm) {
+
+
+
+            if (!alarm_music_start) {
+
+                alarm_music_start = true;
+
+
+
+                document.getElementById('sound_alarm').volume = 0.1;
+                document.getElementById('sound_alarm').play();
+
+
+                //document.getElementById('sound_alarm_voice').currentTime = 0;
+                //document.getElementById('sound_alarm_voice').play();
+
+
+                setInterval(function () {
+                    document.getElementById('sound_alarm_voice').currentTime = 0;
+                    document.getElementById('sound_alarm_voice').play();
+
+                }, 10000);
+
+
+            }
+
+            return;
+        }
 
 
 
@@ -238,6 +275,13 @@ function init() {
         .css('top', current_y + 'px').show();
 
 
+
+    // mostrar nieve?
+    var rand_snow = randomNumber(0, 1);
+    if (rand_snow == 0) {
+        $.getScript('snow.js');
+    }
+
     // mostrar edificios aleatoriamente
 
     shuffle(buildings);
@@ -269,7 +313,7 @@ function init() {
     /*
     // mostrar arboles
     var tree_total;
-    if (screen_width < 480) {
+    if (is_mobile) {
         tree_total = trees_mobile;
     } else {
         tree_total = trees_desktop;
@@ -295,7 +339,7 @@ function init() {
 
 
 
-    if (screen_width < 480) {
+    if (is_mobile) {
         var current_zone = zones[1];
     } else {
         var current_zone = zones[2];
@@ -334,11 +378,18 @@ function randomNumber(min, max) {
 }
 
 
-function flyBox() {
+function flyBoxes() {
 
 
 
-    shuffle(zones);
+    if (is_mobile) {
+        //zones = [zones[3], zones[2], zones[1], zones[0]];
+
+    } else {
+        zones = [zones[3], zones[0], zones[1], zones[2]];
+
+    }
+    //shuffle(zones);
 
 
 
@@ -346,7 +397,7 @@ function flyBox() {
     var boxes = 4;
 
     for (var i = 1; i <= boxes; i++) {
-        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" style="background:url(\'img/box2.png\');background-size:cover;position:fixed;top:-100px;width:70px;height:81px;left:50%;"><img id="paracaidas' + i + '" src="img/paracaidas.png" width="203" height="254" style="position:absolute;margin-left:-69px;margin-top:-229px;"></div>';
+        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" ><img id="paracaidas' + i + '" class="paracaidas" src="img/paracaidas.png" width="203" height="254" ></div>';
 
 
     }
@@ -389,8 +440,14 @@ function flyBox() {
 
         var current_zone = zones[i - 1];
 
-        var zone_x = (current_zone.end_x + current_zone.start_x - (building_width)) / 2;
-        var zone_y = (current_zone.end_y + current_zone.start_y - (building_height)) / 2;
+
+        var zone_x = (current_zone.end_x + current_zone.start_x - 35) / 2;
+        var zone_y = (current_zone.end_y + current_zone.start_y - 41) / 2;
+
+
+        zone_x += randomNumber(-170, 170);
+
+
 
 
         $('.box' + i).css('left', zone_x);
@@ -401,12 +458,21 @@ function flyBox() {
             top: zone_y
         }, 3000, function () {
 
+
+
+            $(this).css('z-index', 2);
+
             var id_paracaidas = $(this).data('index');
 
             $('#paracaidas' + id_paracaidas).animate({
                 height: 0,
                 top: '+=310'
-            }, 3000);
+            }, 3000, function () {
+
+
+                $(this).remove();
+            });
+
         });
 
 
@@ -431,11 +497,22 @@ function flyEagle() {
     eagle_rand = 1;
 
     if (eagle_rand == 1) {
-        eagle_start_x = screen_width;
-        eagle_start_y = screen_height;
-        eagle_final_x = screen_width * -1;
-        eagle_final_y = screen_height * -1;
-        //$('#eagle').removeClass('eagle_flip_x');
+
+        if (is_mobile) {
+            eagle_start_x = screen_width;
+            eagle_start_y = screen_height;
+
+            eagle_final_x = screen_width * -1;
+            eagle_final_y = (screen_height * -1) + 311;
+            //$('#eagle').removeClass('eagle_flip_x');
+        } else {
+            eagle_start_x = screen_width;
+            eagle_start_y = screen_height;
+
+            eagle_final_x = screen_width * -1;
+            eagle_final_y = screen_height * -1;
+            //$('#eagle').removeClass('eagle_flip_x');
+        }
     } else {
         eagle_start_x = screen_width - parseInt($("#eagle").css('width'));
         eagle_start_y = 0;
@@ -456,21 +533,19 @@ function flyEagle() {
 
 
 
+
+
         });
 
 
 
 
 
-    flyBox();
+    setTimeout(function () {
 
-    /*
-        setTimeout(function () {
-    
-            flyBox();
-    
-        }, eagle_speed - 7000);
-        */
+        flyBoxes();
+
+    }, eagle_speed - 7000);
 }
 
 
@@ -480,8 +555,8 @@ function startWalking() {
 
     if (music_start == false) {
 
-        music_start = true;
 
+        music_start = true;
 
 
 
@@ -492,22 +567,29 @@ function startWalking() {
 
 
 
-            document.getElementById('sound_alarm').volume = 0.1;
-            document.getElementById('sound_alarm').play();
 
 
+            if (is_mobile) {
+                $('#alarm1').css('left', (screen_width - 100) / 2).show().animate({
+                    bottom: '+=72'
+                }, 1000);
 
-            $('#alarm1').css('left', '15%').show().animate({
-                bottom: '+=72'
-            }, 1000);
-            $('#alarm2').css('right', '15%').show().animate({
-                bottom: '+=72'
-            }, 1000);
+            } else {
+                $('#alarm1').css('left', '15%').show().animate({
+                    bottom: '+=72'
+                }, 1000);
+                $('#alarm2').css('right', '15%').show().animate({
+                    bottom: '+=72'
+                }, 1000);
+            }
 
             alarm_loop();
 
 
         } else {
+
+            music_start = true;
+
             flyEagle();
             document.getElementById('bg_music1').volume = 1;
             document.getElementById('bg_music1').play();
@@ -545,6 +627,10 @@ function startWalking() {
 
         if (current_x == final_x && current_y == final_y) {
             endWalking();
+
+            if (is_alarm) {
+                randomWalking();
+            }
         } else {
             var next_x = current_x;
             var next_y = current_y;
@@ -570,6 +656,15 @@ function startWalking() {
 
     }, 5);
 
+}
+
+function randomWalking() {
+
+
+    final_x = randomNumber(0, screen_width) - parseInt(villager_width / 2);
+    final_y = randomNumber(0, screen_height) - parseInt(villager_height / 2);
+
+    startWalking();
 }
 
 function endWalking() {
@@ -678,4 +773,7 @@ function alarm_start() {
 
 if (document.location.href.indexOf('alarm') > -1) {
     alarm_start();
+
+
+    startWalking();
 }

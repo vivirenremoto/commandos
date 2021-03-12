@@ -50,6 +50,22 @@ button:focus{
     image-rendering: crisp-edges;
 }
 
+.box{
+    z-index:4;
+    background:url('img/box2.png');
+    background-size:cover;
+    position:fixed;
+    top:-100px;
+    width:70px;
+    height:81px;
+    left:50%;
+}
+
+.paracaidas{
+    position:absolute;
+    margin-left:-69px;
+    margin-top:-229px;
+}
 
 .tree {
     background: url('img/tree.png');
@@ -198,8 +214,12 @@ BUTTON:HOVER {
 
 
     #land {
-        background-size:auto 100%;
+        background-size:auto;}
+
+
+
 }
+
 
 
 
