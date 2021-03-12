@@ -9,22 +9,20 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Oxanium&display=swap" rel="stylesheet">
 
-    <link href="general.css?v=1" rel="stylesheet">
+    <link href="general.css?v=2" rel="stylesheet">
     <link rel="preload" href="img/paper.png" as="image">
     <link rel="shortcut icon" href="favicon.ico">
 
 
-    <meta property="og:image" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
-    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
-    <meta property="og:image:alt" content="Age of Curriculum - Miquel Camps">
+    <meta property="og:image" content="https://vivirenremoto.github.io/commandoss/img/social.png">
+    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/commandoss/img/social.png">
+    <meta property="og:image:alt" content="Commandos CV - Miquel Camps">
     <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Age of Curriculum - Miquel Camps">
-    <meta name="twitter:image" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
+    <meta name="twitter:title" content="Commandos CV - Miquel Camps">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/commandoss/img/social.png">
 
 
-    <link rel="icon" href="img/icon_32_.png" sizes="32x32" />
-    <link rel="icon" href="img/icon_192_.png" sizes="192x192" />
 </head>
 
 <body>
@@ -126,8 +124,13 @@
     </div>
 
 
+    <div id="alarm1" class="alarm"></div>
+    <div id="alarm2" class="alarm"></div>
 
 
+
+    <div id="special"><a href="?alarm"><img src="img/btn_car.png"></a><a href="?"><img src="img/btn_villager.png"></a>
+    </div>
 
 
     <div id="canvas"></div>
@@ -203,6 +206,16 @@
         <source src="mp3/car.mp3" type="audio/mp3">
     </audio>
 
+
+    <audio id="sound_alarm_voice">
+        <source src="mp3/alarm_voice.mp3" type="audio/mp3">
+    </audio>
+
+
+
+    <audio id="sound_alarm" loop>
+        <source src="mp3/alarm.mp3" type="audio/mp3">
+    </audio>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

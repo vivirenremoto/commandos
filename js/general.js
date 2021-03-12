@@ -10,7 +10,9 @@ var trees_mobile = 10;
 var building_width = 203;
 var building_height = 254;
 var is_test = document.location.href.indexOf('test') > -1;
-
+var villager_width = $('#villager').width();
+var villager_height = $('#villager').height();
+var is_alarm = false;
 
 var walking_speed = 1;
 var eagle_speed = 10000;
@@ -93,6 +95,7 @@ if (screen_width < 480) {
 
     ];
 }
+
 
 
 // precargar imagenes
@@ -191,20 +194,32 @@ function init() {
 
         if ($('#paper').is(':visible')) return;
 
-        final_x = e.offsetX;
-        final_y = e.offsetY;
+        final_x = e.offsetX - parseInt(villager_width / 2);
+        final_y = e.offsetY - parseInt(villager_height / 2);
+
+
+        //final_x = e.offsetX;
+        //final_y = e.offsetY;
 
         startWalking();
 
 
         if (!is_test) {
-            var talk_random = randomNumber(1, 3);
-            if (talk_random == 1) {
-                document.getElementById('villager_talk1').play();
-            } else if (talk_random == 2) {
-                document.getElementById('villager_talk2').play();
+
+            if (is_alarm) {
+
+
+
+                document.getElementById('sound_alarm_voice').play();
             } else {
-                document.getElementById('villager_talk3').play();
+                var talk_random = randomNumber(1, 3);
+                if (talk_random == 1) {
+                    document.getElementById('villager_talk1').play();
+                } else if (talk_random == 2) {
+                    document.getElementById('villager_talk2').play();
+                } else {
+                    document.getElementById('villager_talk3').play();
+                }
             }
         }
 
@@ -220,7 +235,7 @@ function init() {
 
     $("#villager")
         .css('left', current_x + 'px')
-        .css('top', current_y + 'px');
+        .css('top', current_y + 'px').show();
 
 
     // mostrar edificios aleatoriamente
@@ -323,6 +338,9 @@ function flyBox() {
 
 
 
+    shuffle(zones);
+
+
 
     var html = '';
     var boxes = 4;
@@ -403,6 +421,7 @@ function flyEagle() {
 
 
 
+    document.getElementById('sound_avion').play();
 
 
     var eagle_rand = Math.floor(Math.random() * 2);
@@ -435,18 +454,15 @@ function flyEagle() {
             $("#eagle").css('top', 0).css('left', 0).hide();
 
 
-            if (!is_test) {
-                flyBox();
-            }
+
 
         });
 
 
 
-    if (is_test) {
 
-        flyBox();
-    }
+
+    flyBox();
 
     /*
         setTimeout(function () {
@@ -468,13 +484,35 @@ function startWalking() {
 
 
 
-        document.getElementById('bg_music1').play();
 
 
-        document.getElementById('sound_avion').play();
 
-        flyEagle();
+        if (is_alarm) {
 
+
+
+
+            document.getElementById('sound_alarm').volume = 0.1;
+            document.getElementById('sound_alarm').play();
+
+
+
+            $('#alarm1').css('left', '15%').show().animate({
+                bottom: '+=72'
+            }, 1000);
+            $('#alarm2').css('right', '15%').show().animate({
+                bottom: '+=72'
+            }, 1000);
+
+            alarm_loop();
+
+
+        } else {
+            flyEagle();
+            document.getElementById('bg_music1').volume = 1;
+            document.getElementById('bg_music1').play();
+
+        }
 
 
 
@@ -501,6 +539,7 @@ function startWalking() {
         } else if (current_x < final_x) {
             $('#villager').addClass('villager_flip_x');
         }
+
 
 
 
@@ -549,12 +588,12 @@ function endWalking() {
     while (!building_found && i < buildings.length) {
         current_building = buildings[i];
 
-        building_x = parseInt($('#' + current_building).css('left'));
-        building_x2 = building_x + parseInt($('#' + current_building).css('width'));
+        building_x = parseInt($('#' + current_building).css('left')) - 20;
+        building_x2 = building_x + parseInt($('#' + current_building).css('width')) - 20;
 
 
-        building_y = parseInt($('#' + current_building).css('top'));
-        building_y2 = building_y + parseInt($('#' + current_building).css('height'));
+        building_y = parseInt($('#' + current_building).css('top')) - 20;
+        building_y2 = building_y + parseInt($('#' + current_building).css('height')) - 20;
 
 
         building_found = (current_x > building_x && current_x < building_x2)
@@ -571,6 +610,8 @@ function endWalking() {
         $('#paper .pages').hide();
         $('#content_' + current_building).show();
         $('#land').addClass('blur');
+
+        current_building = 'barracks';
         document.getElementById('sound_' + current_building).play();
     }
 
@@ -605,5 +646,36 @@ function onlyUnique(value, index, self) {
 
 
 
+function alarm_loop() {
 
 
+    $('body').css('background', 'black');
+
+
+    $('#land').animate({
+        opacity: 0.9
+    }, 200, function () {
+        $('body').css('background', 'red');
+
+
+        $('#land').animate({
+            opacity: 1
+        }, 200, function () {
+            alarm_loop();
+        });
+
+    });
+
+}
+
+function alarm_start() {
+
+    is_alarm = true;
+
+
+
+}
+
+if (document.location.href.indexOf('alarm') > -1) {
+    alarm_start();
+}
