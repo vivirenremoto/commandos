@@ -102,7 +102,7 @@ button:focus{
 
 .paracaidas{
     position:absolute;
-    margin-left:-69px;
+    margin-left:-66px;
     margin-top:-229px;
 }
 
@@ -141,10 +141,6 @@ button:focus{
     image-rendering: crisp-edges;
 }
 
-.eagle_flip_x {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
 
 .villager_flip_x {
     -webkit-transform: scaleX(-1);

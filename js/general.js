@@ -13,6 +13,8 @@ var building_height = 254;
 var is_test = document.location.href.indexOf('test') > -1;
 var villager_width = $('#villager').width();
 var villager_height = $('#villager').height();
+var eagle_width = $('#eagle').width();
+var eagle_height = $('#eagle').height();
 var is_alarm = false;
 var box_width = 70 / 2;
 var box_height = 81 / 2;
@@ -449,32 +451,23 @@ function flyEagle() {
     var eagle_final_x;
     var eagle_final_y;
 
-    eagle_rand = 1;
 
-    if (eagle_rand == 1) {
+    if (is_mobile) {
 
-        if (is_mobile) {
-            eagle_start_x = screen_width;
-            eagle_start_y = screen_height;
+        eagle_start_x = screen_width;
+        eagle_start_y = screen_height;
 
-            eagle_final_x = screen_width * -1;
-            eagle_final_y = (screen_height * -1) + 311;
-            //$('#eagle').removeClass('eagle_flip_x');
-        } else {
-            eagle_start_x = screen_width;
-            eagle_start_y = screen_height;
-
-            eagle_final_x = screen_width * -1;
-            eagle_final_y = screen_height * -1;
-            //$('#eagle').removeClass('eagle_flip_x');
-        }
+        eagle_final_x = screen_width * -1;
+        eagle_final_y = (screen_height * -1) + 311;
     } else {
-        eagle_start_x = screen_width - parseInt($("#eagle").css('width'));
-        eagle_start_y = 0;
-        eagle_final_x = 0;
-        eagle_final_y = screen_height;
-        $('#eagle').addClass('eagle_flip_x');
+
+        eagle_start_x = screen_width;
+        eagle_start_y = screen_height - (eagle_height / 2);
+
+        eagle_final_x = screen_width * -1;
+        eagle_final_y = screen_height * -1;
     }
+
 
     $("#eagle").css('left', eagle_start_x).css('top', eagle_start_y).show();
 
@@ -652,10 +645,7 @@ function endWalking() {
         var diff_y = current_y - building_y;
         if (diff_y < 0) diff_y *= -1;
 
-        building_found = diff_x < 35 && diff_y < 50;
-
-
-        //building_found = (current_x > building_x && current_x < building_x2) && (current_y > building_y && current_y < building_y2);
+        building_found = diff_x < (villager_width / 2) && diff_y < (villager_height / 2);
 
 
         i++;
