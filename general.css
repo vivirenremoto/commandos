@@ -32,7 +32,7 @@ LI, LI A{
 }
 
 #credits{
-    z-index:2;
+    z-index:9999;
     font-size:20px;
     position:fixed;
     top:5px;
