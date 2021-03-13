@@ -22,6 +22,7 @@ var box_height = 81 / 2;
 var walking_speed = 1;
 var eagle_speed = 10000;
 
+
 var music_start = false;
 var alarm_music_start = false;
 
@@ -34,6 +35,11 @@ var eagle_flying_class = '';
 
 var pressed_keys = [];
 var latest_key = [];
+
+
+if (is_mobile) {
+    eagle_speed = eagle_speed / 2;
+}
 
 
 
@@ -333,7 +339,7 @@ function flyBoxes() {
 
 
     if (is_mobile) {
-        //zones = [zones[3], zones[2], zones[1], zones[0]];
+        zones = [zones[3], zones[2], zones[1], zones[0]];
 
     } else {
         zones = [zones[3], zones[1], zones[2], zones[0]];
@@ -395,7 +401,17 @@ function flyBoxes() {
         var zone_y = (current_zone.end_y + current_zone.start_y - 41) / 2;
 
 
-        zone_x += randomNumber(-170, 170);
+        if (is_mobile) {
+            zone_x += randomNumber(-170, 170);
+
+            if (zone_x > (screen_width / 2)) {
+                zone_x -= 131;
+            }
+
+        } else {
+            zone_x += randomNumber(-170, 170);
+
+        }
 
 
 
@@ -410,7 +426,7 @@ function flyBoxes() {
 
 
 
-            $(this).css('z-index', 2);
+            $(this).delay(1000).css('z-index', 2);
 
             var id_paracaidas = $(this).data('index');
 
@@ -493,7 +509,7 @@ function flyEagle() {
 
         flyBoxes();
 
-    }, eagle_speed - 7000);
+    }, eagle_speed / 4);
 }
 
 
