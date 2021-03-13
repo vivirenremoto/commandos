@@ -1,6 +1,6 @@
 // iniciar variables
 var buildings = ['barracks', 'blacksmith', 'university', 'house'];
-var buildings_help = ['skills', 'tools', 'experience', 'my stuff'];
+var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
 var village_walking = false;
 var final_x = 0;
 var final_y = 0;
