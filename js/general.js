@@ -104,9 +104,6 @@ if (is_mobile) {
 (new Image()).src = 'img/villager_walking.gif';
 (new Image()).src = 'img/paper.png';
 
-$(function () {
-    init();
-});
 
 function init() {
 
@@ -330,12 +327,12 @@ function init() {
     */
 
     // terreno aleatorio
-    var lands_images = ['fondo.png'];// ['grass.jpg', 'sand.jpg'];
+    //var lands_images = ['fondo.png'];// ['grass.jpg', 'sand.jpg'];
 
 
 
-    var land_image = lands_images[0];
-    $('#land').css('background-image', "url('img/" + land_image + "'");
+    //var land_image = lands_images[0];
+    //$('#land').css('background-image', "url('img/" + land_image + "'");
 
 
 
@@ -777,3 +774,11 @@ if (document.location.href.indexOf('alarm') > -1) {
 
     startWalking();
 }
+
+
+window.onload = function () {
+
+    init();
+
+    $('#land').fadeIn('slow');
+};
