@@ -1,6 +1,7 @@
 
 
 body {
+    background:black;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -11,6 +12,8 @@ body {
 A {
     color: black;
 }
+
+A:HOVER{cursor: pointer;}
 
 H2 {font-weight:normal;}
 
@@ -180,6 +183,7 @@ BUTTON {
 
 BUTTON:HOVER {
     background: #fff;
+    cursor:pointer;
 }
 
 .flake {

@@ -330,11 +330,11 @@ function init() {
     */
 
     // terreno aleatorio
-    var lands_images = ['MAPA0000.BMP'];// ['grass.jpg', 'sand.jpg'];
+    var lands_images = ['fondo.png'];// ['grass.jpg', 'sand.jpg'];
 
 
 
-    var land_image = 'MAPA0000.BMP';
+    var land_image = lands_images[0];
     $('#land').css('background-image', "url('img/" + land_image + "'");
 
 
@@ -410,7 +410,7 @@ function flyBoxes() {
     for (var i = 1; i <= boxes; i++) {
 
 
-        var rand_box = randomNumber(1000, 10000);
+        var rand_box = 3000 * i;
         var box_speed;
 
         if (i == 1) {
