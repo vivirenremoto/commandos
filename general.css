@@ -81,22 +81,23 @@ button:focus{
 }*/
 
 .box_info{
+    box-shadow: -1px -1px rgba(0, 0, 0, 0.5);
     text-shadow: 0px 2px 2px rgb(0, 0, 0);
-color: white;
-position: absolute;
-margin-top: 15px;
-width: 131px;
-margin-left: 35px;
-font-size: 20px;
-font-family: 'Oxanium', cursive;
-border-top: 1px white solid;
-border-left: 1px white solid;
-text-align: left;
-height: 45px;
-padding-left: 6px;
-padding-top: 4px;
-text-transform: uppercase;
-opacity:0;
+    color: white;
+    position: absolute;
+    margin-top: 15px;
+    width: 131px;
+    margin-left: 35px;
+    font-size: 20px;
+    font-family: 'Oxanium', cursive;
+    border-top: 1px white solid;
+    border-left: 1px white solid;
+    text-align: left;
+    height: 45px;
+    padding-left: 6px;
+    padding-top: 4px;
+    text-transform: uppercase;
+    opacity:0;
 }
 
 .paracaidas{

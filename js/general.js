@@ -211,15 +211,15 @@ function init() {
                 document.getElementById('sound_alarm').play();
 
 
-                //document.getElementById('sound_alarm_voice').currentTime = 0;
-                //document.getElementById('sound_alarm_voice').play();
+                document.getElementById('sound_alarm_voice').currentTime = 0;
+                document.getElementById('sound_alarm_voice').play();
 
 
                 setInterval(function () {
                     document.getElementById('sound_alarm_voice').currentTime = 0;
                     document.getElementById('sound_alarm_voice').play();
 
-                }, 10000);
+                }, 8000);
 
 
             }
@@ -277,11 +277,13 @@ function init() {
 
 
     // mostrar nieve?
+    /*
     var rand_snow = randomNumber(0, 2);
 
     if (rand_snow == 0) {
         $.getScript('js/snow.js');
     }
+    */
 
 
 
@@ -711,6 +713,7 @@ function alarm_loop() {
     $('#land').animate({
         opacity: 0.9
     }, 200, function () {
+
         $('body').css('background', 'red');
 
 
@@ -744,5 +747,11 @@ window.onload = function () {
 
     init();
 
-    $('#land').fadeIn('slow');
+    if (is_alarm) {
+        $('#land').show();
+
+    } else {
+        $('#land').fadeIn('slow');
+
+    }
 };
