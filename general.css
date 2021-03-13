@@ -1,6 +1,7 @@
 
 
 body {
+    overflow:hidden;
     background:black;
     height: 100%;
     width: 100%;
@@ -55,13 +56,47 @@ button:focus{
 
 .box{
     z-index:4;
-    background:url('img/box2.png');
+    background:url('img/box4.png');
     background-size:cover;
     position:fixed;
     top:-100px;
     width:70px;
     height:81px;
     left:50%;
+}
+
+/*
+.box_info{
+    text-shadow: 0px 2px 2px rgb(0, 0, 0);
+    color: red;
+    position: absolute;
+    top: 78px;
+    width: 190px;
+    text-align: center;
+    margin-left: -60px;
+    font-size: 30px;
+    font-family: 'Oxanium', cursive;
+    font-weight: bold;
+    display: none;
+}*/
+
+.box_info{
+    text-shadow: 0px 2px 2px rgb(0, 0, 0);
+color: white;
+position: absolute;
+margin-top: 15px;
+width: 131px;
+margin-left: 35px;
+font-size: 20px;
+font-family: 'Oxanium', cursive;
+border-top: 1px white solid;
+border-left: 1px white solid;
+text-align: left;
+height: 45px;
+padding-left: 6px;
+padding-top: 4px;
+text-transform: uppercase;
+opacity:0;
 }
 
 .paracaidas{
@@ -160,6 +195,7 @@ button:focus{
     left: 50%;
     top: 50%;
     margin-left: -200px;
+    margin-right: -200px;
     margin-top: -300px;
 }
 

@@ -1,5 +1,6 @@
 // iniciar variables
-var buildings = ['blacksmith', 'house', 'barracks', 'university'];
+var buildings = ['barracks', 'blacksmith', 'university', 'house'];
+var buildings_help = ['skills', 'tools', 'experience', 'my stuff'];
 var village_walking = false;
 var final_x = 0;
 var final_y = 0;
@@ -13,6 +14,8 @@ var is_test = document.location.href.indexOf('test') > -1;
 var villager_width = $('#villager').width();
 var villager_height = $('#villager').height();
 var is_alarm = false;
+var box_width = 70 / 2;
+var box_height = 81 / 2;
 
 var walking_speed = 1;
 var eagle_speed = 10000;
@@ -274,47 +277,16 @@ function init() {
 
 
     // mostrar nieve?
-    var rand_snow = randomNumber(0, 1);
+    var rand_snow = randomNumber(0, 2);
+
     if (rand_snow == 0) {
-        $.getScript('snow.js');
+        $.getScript('js/snow.js');
     }
 
-    // mostrar edificios aleatoriamente
-
-    shuffle(buildings);
-
-    /*
-
-    for (var i = 0; i < buildings.length; i++) {
-        $('#land').append('<div id="' + buildings[i] + '">&nbsp;</div>');
-
-        var current_zone = zones[i];
-
-        var building_width = parseInt($('#' + buildings[i]).css('width'));
-        var building_height = parseInt($('#' + buildings[i]).css('height'));
-
-        zone_x = (current_zone.end_x + current_zone.start_x - (building_width)) / 2;
-        zone_y = (current_zone.end_y + current_zone.start_y - (building_height)) / 2;
-
-        $('#' + buildings[i])
-            .css('left', zone_x)
-            .css('top', zone_y);
-    }
-    */
 
 
 
 
-
-
-  
-
-    // terreno aleatorio
-    //var lands_images = ['fondo.png'];
-
-
-    //var land_image = lands_images[0];
-    //$('#land').css('background-image', "url('img/" + land_image + "'");
 
 
 
@@ -331,7 +303,7 @@ function init() {
     $('#villager').css('left', zone_x).css('top', zone_y);
 
 
-    
+
 
 
 
@@ -360,10 +332,10 @@ function flyBoxes() {
         //zones = [zones[3], zones[2], zones[1], zones[0]];
 
     } else {
-        zones = [zones[3], zones[0], zones[1], zones[2]];
+        zones = [zones[3], zones[1], zones[2], zones[0]];
 
     }
-    
+
 
 
 
@@ -371,7 +343,7 @@ function flyBoxes() {
     var boxes = 4;
 
     for (var i = 1; i <= boxes; i++) {
-        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" ><img id="paracaidas' + i + '" class="paracaidas" src="img/paracaidas.png" width="203" height="254" ></div>';
+        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" ><img id="paracaidas' + i + '" class="paracaidas" src="img/paracaidas.png" width="203" height="254" ><span class="box_info">' + buildings_help[i - 1] + '</span></div>';
 
 
     }
@@ -438,10 +410,17 @@ function flyBoxes() {
 
             var id_paracaidas = $(this).data('index');
 
+
             $('#paracaidas' + id_paracaidas).animate({
                 height: 0,
                 top: '+=310'
             }, 3000, function () {
+
+
+                $(this).parent().find('.box_info').animate({
+                    'margin-top': -26,
+                    'opacity': 1
+                }, 500);
 
 
                 $(this).remove();
@@ -657,16 +636,24 @@ function endWalking() {
     while (!building_found && i < buildings.length) {
         current_building = buildings[i];
 
-        building_x = parseInt($('#' + current_building).css('left')) - 20;
-        building_x2 = building_x + parseInt($('#' + current_building).css('width')) - 20;
+        building_x = parseInt($('#' + current_building).css('left'));//- box_width;
+        building_x2 = building_x + parseInt($('#' + current_building).css('width'));//+ box_width;
 
 
-        building_y = parseInt($('#' + current_building).css('top')) - 20;
-        building_y2 = building_y + parseInt($('#' + current_building).css('height')) - 20;
+        building_y = parseInt($('#' + current_building).css('top'));// - box_height;
+        building_y2 = building_y + parseInt($('#' + current_building).css('height'));//+ box_height;
 
 
-        building_found = (current_x > building_x && current_x < building_x2)
-            && (current_y > building_y && current_y < building_y2);
+        var diff_x = current_x - building_x;
+        if (diff_x < 0) diff_x *= -1;
+
+        var diff_y = current_y - building_y;
+        if (diff_y < 0) diff_y *= -1;
+
+        building_found = diff_x < 35 && diff_y < 50;
+
+
+        //building_found = (current_x > building_x && current_x < building_x2) && (current_y > building_y && current_y < building_y2);
 
 
         i++;
