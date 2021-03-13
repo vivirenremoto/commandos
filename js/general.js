@@ -426,7 +426,7 @@ function flyBoxes() {
 
 
 
-            $(this).delay(1000).css('z-index', 2);
+            $(this).css('z-index', 2);
 
             var id_paracaidas = $(this).data('index');
 
