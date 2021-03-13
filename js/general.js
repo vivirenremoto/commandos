@@ -101,8 +101,8 @@ if (is_mobile) {
 
 
 // precargar imagenes
-(new Image()).src = 'img/villager_walking.gif';
-(new Image()).src = 'img/paper.png';
+//(new Image()).src = 'img/villager_walking.gif';
+//(new Image()).src = 'img/paper.png';
 
 
 function init() {
@@ -307,28 +307,10 @@ function init() {
 
 
 
-    /*
-    // mostrar arboles
-    var tree_total;
-    if (is_mobile) {
-        tree_total = trees_mobile;
-    } else {
-        tree_total = trees_desktop;
-    }
-
-    for (var i = 1; i < tree_total; i++) {
-
-        $('#land').append('<div id="tree' + i + '" class="tree">&nbsp;</div>');
-
-        $("#tree" + i)
-            .css('left', Math.floor(Math.random() * (screen_width - parseInt($('#tree' + i).css('width')))))
-            .css('top', Math.floor(Math.random() * (screen_height - parseInt($('#tree' + i).css('height')))));
-    }
-    */
+  
 
     // terreno aleatorio
-    //var lands_images = ['fondo.png'];// ['grass.jpg', 'sand.jpg'];
-
+    //var lands_images = ['fondo.png'];
 
 
     //var land_image = lands_images[0];
@@ -337,7 +319,7 @@ function init() {
 
 
     if (is_mobile) {
-        var current_zone = zones[1];
+        var current_zone = zones[3];
     } else {
         var current_zone = zones[2];
     }
@@ -349,12 +331,7 @@ function init() {
     $('#villager').css('left', zone_x).css('top', zone_y);
 
 
-    // mostrar aguila de forma aleatoria
-
-
-    //setInterval(function () {
-    //    flyEagle();
-    //}, eagle_speed * 2);
+    
 
 
 
@@ -386,7 +363,7 @@ function flyBoxes() {
         zones = [zones[3], zones[0], zones[1], zones[2]];
 
     }
-    //shuffle(zones);
+    
 
 
 
