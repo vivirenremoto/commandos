@@ -303,7 +303,7 @@ function init() {
 
     $("#villager")
         .css('left', current_x + 'px')
-        .css('top', current_y + 'px').show();
+        .css('top', current_y + 'px');
 
 
 
@@ -333,11 +333,28 @@ function init() {
     var zone_y = (current_zone.end_y + current_zone.start_y - (building_height)) / 2;
 
 
+
+
+
+
     $('#villager').css('left', zone_x).css('top', zone_y);
 
 
+    if (is_alarm) {
+        $('#land').show();
 
 
+
+
+    } else {
+        $('#land').fadeIn('slow');
+
+    }
+
+
+    $('#special').show();
+    $('#lang').show();
+    $('#villager').show();
 
 
 }
@@ -376,7 +393,7 @@ function flyBoxes() {
     var boxes = 4;
 
     for (var i = 1; i <= boxes; i++) {
-        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" ><img id="paracaidas' + i + '" class="paracaidas" src="img/paracaidas.png" width="203" height="254" ><span class="box_info">' + buildings_help[i - 1] + '</span></div>';
+        html += '<div id="' + buildings[i - 1] + '" class="box box' + i + '" ><img id="paracaidas' + i + '" class="paracaidas" src="img/paracaidas2.png" width="203" height="254" ><span class="box_info">' + buildings_help[i - 1] + '</span></div>';
 
 
     }
@@ -693,7 +710,7 @@ function endWalking() {
     if (building_found) {
         village_walking = true;
 
-        setTimeout(function(){
+        setTimeout(function () {
             $('#paper').show();
             $('#special').hide();
             $('#paper .pages').hide();
@@ -772,11 +789,4 @@ window.onload = function () {
 
     init();
 
-    if (is_alarm) {
-        $('#land').show();
-
-    } else {
-        $('#land').fadeIn('slow');
-
-    }
 };
