@@ -86,7 +86,7 @@ button:focus{
     position: fixed;
     background-size: auto 90px;
     background-position: center center;
-    image-rendering: pixelated;/*crisp-edges;*/
+    image-rendering: pixelated;
 }
 
 #villager.soldier {
@@ -98,7 +98,7 @@ button:focus{
     position: fixed;
     background-size: auto 100% !important;
     background-position: center center;
-    image-rendering: pixelated;/*crisp-edges;*/
+    image-rendering: pixelated;
 }
 
 .box{
@@ -110,7 +110,7 @@ button:focus{
     width:70px;
     height:81px;
     left:50%;
-    image-rendering: pixelated;/*crisp-edges;*/
+    image-rendering: pixelated;
 }
 
 .box_info{
@@ -139,15 +139,6 @@ button:focus{
     margin-top:-229px;
 }
 
-.tree {
-    background: url('img/tree.png');
-    width: 80px;
-    height: 100px;
-    background-size: contain;
-    z-index: 1;
-    position: fixed;
-    opacity:0.8;
-}
 
 
 #eagle {
@@ -159,7 +150,7 @@ button:focus{
     background-size:cover;
     z-index: 3;
     position: fixed;
-    image-rendering: pixelated;/*crisp-edges;*/
+    image-rendering: pixelated;
 }
 
 
@@ -188,7 +179,7 @@ button:focus{
     background-position:left bottom;
     top: 0;
     left: 0;
-    image-rendering: pixelated;/*crisp-edges;*/
+    image-rendering: pixelated;
 }
 
 #canvas {
@@ -291,3 +282,31 @@ BUTTON:HOVER {
 
 #special{position:fixed;z-index:9999;left:10px;top:0;width:50px;}
 #special img{border-radius:100px;border:2px black solid;margin:10px 0 0 0;width:40px;height:40px;background:black;}
+
+
+/*firefox hack*/
+
+@-moz-document url-prefix() { 
+
+#villager {
+    image-rendering: crisp-edges;
+}
+
+#villager.soldier {
+    image-rendering: crisp-edges;
+}
+
+#eagle {
+    display:none;
+    image-rendering: crisp-edges;
+}
+
+.box{
+    image-rendering: crisp-edges;
+}
+
+#land {
+    image-rendering: crisp-edges;
+}
+
+}
