@@ -73,6 +73,21 @@ button:focus{
     opacity:0.7;
 }
 
+#play{
+    display:none;
+    padding:5px 0;
+    width:180px;
+    background:white;
+    position:fixed;
+    left:50%;
+    top:0;
+    margin-left:-90px;
+    text-align:center;
+    font-family: 'Oxanium', cursive;
+    z-index:999;
+    text-decoration:none;
+}
+
 #lang{
     display:none;
     z-index:9999;
@@ -280,10 +295,9 @@ BUTTON:HOVER {
     #tooltip{display:none;}
 
 
-    #land {
-        background-size:auto;}
+    #land {background-size:auto;}
 
-
+    #play{top:auto;bottom:0;}
 
 }
 

@@ -8,6 +8,7 @@ if (document.location.href.indexOf('en.html') > -1) {
     var buildings_help = ['skills', 'tools', 'experience', 'stuff'];
 }
 
+var is_loaded = false;
 var village_walking = false;
 var final_x = 0;
 var final_y = 0;
@@ -135,6 +136,8 @@ if (is_mobile) {
 
 function init() {
 
+    is_loaded = true;
+
     // arrow controls
     document.onkeydown = function (e) {
 
@@ -222,6 +225,8 @@ function init() {
     $('#canvas').click(function (e) {
 
 
+        if (!is_loaded) return;
+
         if (is_alarm) {
 
 
@@ -293,6 +298,8 @@ function init() {
 
 
 
+
+
         //}
     });
 
@@ -355,6 +362,9 @@ function init() {
     $('#special').show();
     $('#lang').show();
     $('#villager').show();
+
+
+    $('#play').delay(1000).fadeIn('slow');
 
 
 }
