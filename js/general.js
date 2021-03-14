@@ -702,7 +702,7 @@ function endWalking() {
 
             current_building = 'barracks';
             document.getElementById('sound_' + current_building).play();
-        },1000);
+        }, 250);
     }
 
 }
