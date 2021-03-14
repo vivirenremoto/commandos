@@ -89,7 +89,7 @@ if (is_mobile) {
             start_x: 0,
             end_x: screen_width,
             start_y: (screen_height / 4) * 3,
-            end_y: (screen_height / 4) * 4
+            end_y: ((screen_height / 4) * 4) - 50
         },
 
     ];
@@ -217,6 +217,8 @@ function init() {
 
         $('#paper').hide();
         $('#special').show();
+        $('#play').show();
+        $('#lang').show();
         $('#land').removeClass('blur');
         document.getElementById('click').play();
     });
@@ -724,6 +726,8 @@ function endWalking() {
             $('#paper').show();
             $('#special').hide();
             $('#paper .pages').hide();
+            $('#play').hide();
+            $('#lang').hide();
             $('#content_' + current_building).show();
             $('#land').addClass('blur');
 
