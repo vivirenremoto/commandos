@@ -1,30 +1,49 @@
 <html>
 
 <head>
-    <title>Age of Curriculum - Miquel Camps</title>
-    <meta name="description" content="Interactive CV based on Age of Empires game" />
+    <title>Commandos CV - Miquel Camps</title>
+    <meta name="description" content="Interactive CV based on Commandos game" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width">
 
-    <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Romanesco&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Oxanium&display=swap" rel="stylesheet">
 
-    <link href="general.css?v=1" rel="stylesheet">
-    <link rel="preload" href="img/paper.png" as="image">
+    <link href="general.css?v=6" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
 
 
-    <meta property="og:image" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
-    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
-    <meta property="og:image:alt" content="Age of Curriculum - Miquel Camps">
+
+
+
+    <link rel="prefetch" href="mp3/music1.mp3" />
+    <link rel="prefetch" href="mp3/click.mp3" />
+    <link rel="prefetch" href="mp3/avion.mp3" />
+    <link rel="prefetch" href="mp3/sound_barracks.mp3" />
+    <link rel="prefetch" href="mp3/en/villager.mp3" />
+    <link rel="prefetch" href="mp3/en/villager2.mp3" />
+    <link rel="prefetch" href="mp3/en/villager3.mp3" />
+    <link rel="prefetch" href="img/fondo.png" />
+    <link rel="prefetch" href="img/boina_walking.gif" />
+    <link rel="prefetch" href="img/boina_stopped.gif" />
+    <link rel="prefetch" href="img/villager_walking.gif" />
+    <link rel="prefetch" href="img/villager_stopped.gif" />
+    <link rel="prefetch" href="img/paracaidas.png" />
+    <link rel="prefetch" href="img/paper3.png" />
+    <link rel="prefetch" href="img/avion_sombra.png" />
+    <link rel="prefetch" href="img/box2.png" />
+    <link rel="prefetch" href="img/alarm.gif" />
+
+
+    <meta property="og:image" content="https://vivirenremoto.github.io/commandos/img/social.png">
+    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/commandos/img/social.png">
+    <meta property="og:image:alt" content="Commandos CV - Miquel Camps">
     <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Age of Curriculum - Miquel Camps">
-    <meta name="twitter:image" content="https://vivirenremoto.github.io/ageofcv/img/social.png">
+    <meta name="twitter:title" content="Commandos CV - Miquel Camps">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/commandos/img/social.png">
 
 
-    <link rel="icon" href="img/icon_32_.png" sizes="32x32" />
-    <link rel="icon" href="img/icon_192_.png" sizes="192x192" />
 </head>
 
 <body>
@@ -99,7 +118,7 @@
         </div>
 
         <div id="content_barracks" class="pages">
-            <h2>Developer Skills</h2>
+            <h2>Skills</h2>
             <ul>
                 <li>
                     Web development (php & js)
@@ -126,8 +145,13 @@
     </div>
 
 
-    <div id="special"><a href="?howtoturnthison"><img src="img/btn_car.png"></a><a href="?wololo"><img
-                src="img/btn_wololo.png"></a><a href="?"><img src="img/btn_villager.png"></a></div>
+    <div id="alarm1" class="alarm"></div>
+    <div id="alarm2" class="alarm"></div>
+
+
+
+    <div id="special"><a href="?alarm"><img src="img/btn_car.png"></a><a href="?"><img src="img/btn_villager.png"></a>
+    </div>
 
 
     <div id="canvas"></div>
@@ -142,14 +166,16 @@
 
 
 
+        <div id="boxes"></div>
+
+
+
+
+
     </div>
 
     <audio id="bg_music1" loop>
         <source src="mp3/music1.mp3" type="audio/mp3">
-    </audio>
-
-    <audio id="bg_music2" loop>
-        <source src="mp3/music2.mp3" type="audio/mp3">
     </audio>
 
     <audio id="bg_wololo" loop>
@@ -157,54 +183,54 @@
     </audio>
 
     <audio id="villager_talk1">
-        <source src="mp3/villager.mp3" type="audio/mp3">
+        <source src="mp3/en/villager.mp3" type="audio/mp3">
     </audio>
 
     <audio id="villager_talk2">
-        <source src="mp3/villager2.mp3" type="audio/mp3">
+        <source src="mp3/en/villager2.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="villager_talk3">
+        <source src="mp3/en/villager3.mp3" type="audio/mp3">
     </audio>
 
     <audio id="click">
         <source src="mp3/click.mp3" type="audio/mp3">
     </audio>
 
+    <audio id="sound_avion">
+        <source src="mp3/avion.mp3" type="audio/mp3">
+    </audio>
 
 
     <audio id="sound_barracks">
         <source src="mp3/sound_barracks.mp3" type="audio/mp3">
     </audio>
 
-    <audio id="sound_university">
-        <source src="mp3/sound_university.mp3" type="audio/mp3">
+    <audio id="sound_alarm_voice">
+        <source src="mp3/alarm_voice.mp3" type="audio/mp3">
     </audio>
 
-    <audio id="sound_house">
-        <source src="mp3/sound_house.mp3" type="audio/mp3">
-    </audio>
 
-    <audio id="sound_blacksmith">
-        <source src="mp3/sound_blacksmith.mp3" type="audio/mp3">
-    </audio>
 
-    <audio id="sound_car">
-        <source src="mp3/car.mp3" type="audio/mp3">
+    <audio id="sound_alarm" loop>
+        <source src="mp3/alarm.mp3" type="audio/mp3">
     </audio>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="js/general.js?v=1"></script>
-
+    <script src="js/general.js?v=5"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114321266-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKDFT8Y9JC"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'UA-114321266-1');
+        gtag('config', 'G-NKDFT8Y9JC');
     </script>
+
 
 </body>
 

@@ -1,6 +1,13 @@
 // iniciar variables
 var buildings = ['barracks', 'blacksmith', 'university', 'house'];
 var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
+
+
+if (document.location.href.indexOf('en.html') > -1) {
+
+    var buildings_help = ['skills', 'tools', 'experience', 'stuff'];
+}
+
 var village_walking = false;
 var final_x = 0;
 var final_y = 0;
@@ -11,17 +18,15 @@ var trees_mobile = 10;
 var building_width = 203;
 var building_height = 254;
 var is_test = document.location.href.indexOf('test') > -1;
-var villager_width = $('#villager').width();
-var villager_height = $('#villager').height();
 var eagle_width = $('#eagle').width();
 var eagle_height = $('#eagle').height();
-var is_alarm = false;
+
 var box_width = 70 / 2;
 var box_height = 81 / 2;
 
 var walking_speed = 1;
 var eagle_speed = 10000;
-
+var villager_voice = false;
 
 var music_start = false;
 var alarm_music_start = false;
@@ -35,6 +40,18 @@ var eagle_flying_class = '';
 
 var pressed_keys = [];
 var latest_key = [];
+
+var is_alarm = document.location.href.indexOf('alarm') > -1;
+
+if (is_alarm) {
+    $('#villager').addClass('soldier');
+    villager_walking_class = 'soldier_walking';
+}
+
+
+
+var villager_width = $('#villager').width();
+var villager_height = $('#villager').height();
 
 
 if (is_mobile) {
@@ -257,14 +274,20 @@ function init() {
 
                 document.getElementById('sound_alarm_voice').play();
             } else {
-                var talk_random = randomNumber(1, 3);
-                if (talk_random == 1) {
-                    document.getElementById('villager_talk1').play();
-                } else if (talk_random == 2) {
-                    document.getElementById('villager_talk2').play();
-                } else {
-                    document.getElementById('villager_talk3').play();
+
+                var found = false;
+                while (!found) {
+                    var i = randomNumber(1, 3);
+                    if (villager_voice != i) {
+                        found = true;
+                        villager_voice = i;
+                    }
+                    i++;
                 }
+
+                document.getElementById('villager_talk' + villager_voice).play();
+
+
             }
         }
 
@@ -733,16 +756,9 @@ function alarm_loop() {
 
 }
 
-function alarm_start() {
-
-    is_alarm = true;
 
 
-
-}
-
-if (document.location.href.indexOf('alarm') > -1) {
-    alarm_start();
+if (is_alarm) {
 
 
     startWalking();

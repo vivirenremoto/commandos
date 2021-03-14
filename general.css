@@ -26,7 +26,7 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    cursor: url('img/cursor.cur'), auto;
+    cursor: url('img/cursor2.cur'), auto;
 
     touch-action: pan-x pan-y;
 }
@@ -65,12 +65,25 @@ button:focus{
 
 #villager {
     display:none;
-    background: url('img/villager_stopped.gif');
+    background: url('img/boina_stopped.png');
+    background-repeat:no-repeat;
+    width: 80px;
+    height: 110px;
+    z-index: 3;
+    position: fixed;
+    background-size: auto 90px;
+    background-position: center center;
+    image-rendering: crisp-edges;
+}
+
+#villager.soldier {
+    display:none;
+    background: url('img/villager_stopped.gif') !important;
     width: 70px;
     height: 100px;
     z-index: 3;
     position: fixed;
-    background-size: auto 100%;
+    background-size: auto 100% !important;
     background-position: center center;
     image-rendering: crisp-edges;
 }
@@ -168,7 +181,12 @@ button:focus{
     transform: scaleX(-1);
 }
 
-.villager_walking {
+#villager.villager_walking {
+    background-size: auto 100px !important;
+    background-image: url('img/boina_walking.gif') !important;
+}
+
+#villager.soldier_walking {
     background-image: url('img/villager_walking.gif') !important;
 }
 
@@ -285,4 +303,4 @@ BUTTON:HOVER {
 
 
 #special{position:fixed;z-index:9999;left:10px;top:0;width:50px;}
-#special img{border-radius:100px;border:2px black solid;margin:10px 0 0 0;width:40px;height:40px;}
+#special img{border-radius:100px;border:2px black solid;margin:10px 0 0 0;width:40px;height:40px;background:black;}
