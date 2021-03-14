@@ -544,7 +544,7 @@ function flyEagle() {
         top: eagle_final_y + 'px'
     },
         eagle_speed, 'linear', function () {
-            $("#eagle").css('top', 0).css('left', 0).hide();
+            $("#eagle").remove();
 
 
 
