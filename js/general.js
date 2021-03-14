@@ -692,14 +692,17 @@ function endWalking() {
 
     if (building_found) {
         village_walking = true;
-        $('#paper').show();
-        $('#special').hide();
-        $('#paper .pages').hide();
-        $('#content_' + current_building).show();
-        $('#land').addClass('blur');
 
-        current_building = 'barracks';
-        document.getElementById('sound_' + current_building).play();
+        setTimeout(function(){
+            $('#paper').show();
+            $('#special').hide();
+            $('#paper .pages').hide();
+            $('#content_' + current_building).show();
+            $('#land').addClass('blur');
+
+            current_building = 'barracks';
+            document.getElementById('sound_' + current_building).play();
+        },1000);
     }
 
 }
