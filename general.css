@@ -85,12 +85,12 @@ button:focus{
     background:white;
     position:fixed;
     left:50%;
-    bottom:0;
     margin-left:-90px;
     text-align:center;
     font-family: Arial;
     z-index:999;
     text-decoration:none;
+    top:0;
 }
 
 #lang{
@@ -322,7 +322,7 @@ BUTTON:HOVER {
 
     #land {background-size:auto;}
 
-    #play{left:0;margin-left:0;width:100%;}
+    #play{left:0;margin-left:0;width:100%;top:auto;bottom:0;}
 
 }
 
