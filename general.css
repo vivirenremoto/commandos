@@ -299,6 +299,8 @@ BUTTON:HOVER {
     width: 200px;
     text-align: center;}
 
+.button:hover{color:white;background:black;}
+
 .alarm{
     opacity:0.9;
     display:none;
