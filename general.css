@@ -117,22 +117,22 @@ button:focus{
     image-rendering: pixelated;
 }
 
-#enemy {
+.enemy {
     cursor: url('img/cuchillo2.cur'), auto;
     display:none;
-    background-image: url('img/villager_stopped2.gif') !important;
+    background-image: url('img/villager_stopped2.gif');
     background-repeat:no-repeat;
     width: 70px;
     height: 90px;
     z-index: 3;
     position: fixed;
-    background-size: auto 90px !important;
+    background-size: auto 90px;
     background-position: center center;
     image-rendering: pixelated;
 }
 
-#enemy.soldier_walking {
-    background-image: url('img/villager_walking2.gif') !important;
+.soldier_walking {
+    background-image: url('img/villager_walking2.gif');
 }
 
 .box{
@@ -200,8 +200,8 @@ button:focus{
 
 
 
-#enemy.soldier_died {
-    background-size: auto 75px !important;
+.soldier_died {
+    background-size: auto 75px;
     background-image: url('img/soldier_died.png') !important;
 }
 
