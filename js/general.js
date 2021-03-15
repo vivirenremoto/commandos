@@ -56,14 +56,14 @@ var alarm_started = false;
 
 
 
-if (document.location.href.indexOf('en.html') == -1) {
+var buildings = ['barracks', 'university', 'house', 'blacksmith'];
 
-    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
-    var buildings_help = ['tools', 'mis cosas', 'experiencia', 'skills'];
+if (document.location.href.indexOf('en.html') == -1) {
+    var buildings_help = ['skills', 'experiencia', 'mis cosas', 'tools'];
 
 } else {
-    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
-    var buildings_help = ['tools', 'stuff', 'experience', 'skills'];
+
+    var buildings_help = ['skills', 'experience', 'stuff', 'tools'];
 
 }
 
@@ -74,9 +74,10 @@ if (is_mobile) {
 
 
 
-    buildings.reverse();
-    buildings_help.reverse();
+
 }
+
+
 
 if (is_test) {
     enemies_total = 1;
