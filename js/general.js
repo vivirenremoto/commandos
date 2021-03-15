@@ -421,6 +421,23 @@ function init() {
     $('#play').delay(1000).fadeIn('slow');
 
 
+    setInterval(function () {
+
+
+        $('#btn_cta').html($('#btn_cta').data('cta2'));
+
+        setTimeout(function () {
+
+
+            $('#btn_cta').html($('#btn_cta').data('cta1'));
+
+        }, 2000);
+
+    }, 4000);
+
+
+
+
 }
 
 function randomNumber(min, max) {
@@ -638,20 +655,7 @@ function startWalking() {
 
 
 
-
-            if (is_mobile) {
-                $('#alarm1').css('left', (screen_width - 100) / 2).show().animate({
-                    height: 98
-                }, 1000);
-
-            } else {
-                $('#alarm1').css('left', '15%').show().animate({
-                    height: 98
-                }, 1000);
-                $('#alarm2').css('right', '15%').show().animate({
-                    height: 98
-                }, 1000);
-            }
+            $('#alarm1').show();
 
             alarm_loop();
 
@@ -836,15 +840,15 @@ function enemyCheck(index) {
 
             setTimeout(function () {
 
-                $('#alarm2').hide({ top: '+=100' }, 500);
 
-                $('#alarm1').animate({ top: '+=100' }, 500, function () {
+                $('#alarm1').hide();
 
 
-                    document.getElementById('sound_alarm').pause();
-                    document.getElementById('sound_alarm_voice').pause();
 
-                });
+                document.getElementById('sound_alarm').pause();
+                document.getElementById('sound_alarm_voice').pause();
+
+
 
 
 
