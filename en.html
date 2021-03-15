@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Oxanium&display=swap" rel="stylesheet">
 
-    <link href="general.css?v=12" rel="stylesheet">
+    <link href="general.css?v=13" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
 
 
@@ -25,6 +25,8 @@
     <link rel="prefetch" href="mp3/es/villager3.mp3?2" />
     <link rel="prefetch" href="mp3/es/alarm.mp3" />
     <link rel="prefetch" href="mp3/es/alarm_voice.mp3" />
+    <link rel="prefetch" href="mp3/enemy_died.mp3" />
+    <link rel="prefetch" href="mp3/won.mp3" />
     <link rel="prefetch" href="img/fondo2.png" />
     <link rel="prefetch" href="img/boina_walking2.gif" />
     <link rel="prefetch" href="img/boina_stopped2.gif" />
@@ -127,9 +129,6 @@
                     Web development (php & js)
                 </li>
                 <li>
-                    WordPress plugins
-                </li>
-                <li>
                     Chrome & Firefox extensions
                 </li>
                 <li>
@@ -162,7 +161,7 @@
     <div id="canvas"></div>
     <div id="land">
 
-
+        <div id="enemy">&nbsp;</div>
         <div id="villager">&nbsp;</div>
         <div id="eagle">&nbsp;</div>
 
@@ -213,15 +212,21 @@
         <source src="mp3/alarm_voice.mp3" type="audio/mp3">
     </audio>
 
-
-
     <audio id="sound_alarm" loop>
         <source src="mp3/alarm.mp3" type="audio/mp3">
     </audio>
 
+    <audio id="sound_enemy_died">
+        <source src="mp3/enemy_died.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="sound_won">
+        <source src="mp3/won.mp3" type="audio/mp3">
+    </audio>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="js/general.js?v=12"></script>
+    <script src="js/general.js?v=13"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKDFT8Y9JC"></script>

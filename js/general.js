@@ -1,7 +1,4 @@
 // iniciar variables
-var buildings = ['barracks', 'blacksmith', 'university', 'house'];
-var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
-
 
 if (document.location.href.indexOf('en.html') > -1) {
 
@@ -10,10 +7,17 @@ if (document.location.href.indexOf('en.html') > -1) {
 
 var is_loaded = false;
 var village_walking = false;
+var enemy_walking = false;
+var timer_alarm_sound;
+var enemy_died = false;
 var final_x = 0;
 var final_y = 0;
 var current_x = 0;
 var current_y = 0;
+var enemy_final_x = 0;
+var enemy_final_y = 0;
+var enemy_current_x = 0;
+var enemy_current_y = 0;
 var trees_desktop = 20;
 var trees_mobile = 10;
 var building_width = 203;
@@ -44,19 +48,26 @@ var latest_key = [];
 
 var is_alarm = document.location.href.indexOf('alarm') > -1;
 
-if (is_alarm) {
-    $('#villager').addClass('soldier');
-    villager_walking_class = 'soldier_walking';
-}
 
 
 
 var villager_width = $('#villager').width();
 var villager_height = $('#villager').height();
 
+var buildings = ['barracks', 'blacksmith', 'university', 'house'];
+var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
+
+
 
 if (is_mobile) {
     eagle_speed = eagle_speed / 2;
+
+
+
+    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
+    var buildings_help = ['tools', 'mis cosas', 'experiencia', 'skills'];
+
+
 }
 
 
@@ -94,6 +105,8 @@ if (is_mobile) {
 
     ];
 
+    var zone_enemy = zones[0];
+
 } else {
     var zones = [
         {
@@ -125,6 +138,10 @@ if (is_mobile) {
         },
 
     ];
+
+
+
+    var zone_enemy = zones[3];
 }
 
 
@@ -239,6 +256,15 @@ function init() {
 
 
 
+
+
+
+                randomWalking();
+
+
+                $('#enemy').addClass('soldier_walking');
+
+
                 document.getElementById('sound_alarm').volume = 0.1;
                 document.getElementById('sound_alarm').play();
 
@@ -247,7 +273,7 @@ function init() {
                 document.getElementById('sound_alarm_voice').play();
 
 
-                setInterval(function () {
+                timer_alarm_sound = setInterval(function () {
                     document.getElementById('sound_alarm_voice').currentTime = 0;
                     document.getElementById('sound_alarm_voice').play();
 
@@ -256,7 +282,7 @@ function init() {
 
             }
 
-            return;
+            //return;
         }
 
 
@@ -275,12 +301,10 @@ function init() {
 
         if (!is_test) {
 
-            if (is_alarm) {
+            if (!is_alarm) {
 
 
 
-                document.getElementById('sound_alarm_voice').play();
-            } else {
 
                 var found = false;
                 while (!found) {
@@ -351,6 +375,13 @@ function init() {
 
     if (is_alarm) {
         $('#land').show();
+
+
+
+        var enemy_start_x = randomNumber(zone_enemy.start_x, zone_enemy.end_x) - parseInt(villager_width / 2);
+        var enemy_start_y = randomNumber(zone_enemy.start_y, zone_enemy.end_y) - parseInt(villager_height / 2);
+
+        $('#enemy').css('left', enemy_start_x).css('top', enemy_start_y).show();
 
 
 
@@ -644,9 +675,7 @@ function startWalking() {
         if (current_x == final_x && current_y == final_y) {
             endWalking();
 
-            if (is_alarm) {
-                randomWalking();
-            }
+
         } else {
             var next_x = current_x;
             var next_y = current_y;
@@ -674,13 +703,100 @@ function startWalking() {
 
 }
 
+function numberBetween(value1, value2, diff) {
+    return (value1 <= value2 + diff) && (value1 >= value2 - diff);
+}
+
+
 function randomWalking() {
 
 
-    final_x = randomNumber(0, screen_width) - parseInt(villager_width / 2);
-    final_y = randomNumber(0, screen_height) - parseInt(villager_height / 2);
+    enemy_final_x = randomNumber(0, screen_width) - parseInt(villager_width / 2);
+    enemy_final_y = randomNumber(0, screen_height) - parseInt(villager_height / 2);
 
-    startWalking();
+
+    if (enemy_walking) return;
+
+    enemy_walking = setInterval(function () {
+
+
+
+        enemy_current_x = parseInt($('#enemy').css('left'));
+        enemy_current_y = parseInt($('#enemy').css('top'));
+        if (enemy_current_x > enemy_final_x) {
+            $('#enemy').removeClass('villager_flip_x');
+        } else if (enemy_current_x < enemy_final_x) {
+            $('#enemy').addClass('villager_flip_x');
+        }
+
+
+        var diff_position = 50;
+
+
+
+
+
+        if ($('#villager').hasClass(villager_walking_class) && numberBetween(enemy_current_x, current_x, diff_position) && numberBetween(enemy_current_y, current_y, diff_position)) {
+
+            setTimeout(function () {
+                document.getElementById('sound_won').play();
+            }, 2000);
+
+            document.getElementById('sound_enemy_died').play();
+            document.getElementById('sound_alarm').pause();
+            document.getElementById('sound_alarm_voice').pause();
+
+            setTimeout(function () {
+
+                $('#alarm1').animate({ top: '+=100' }, 500);
+                $('#alarm2').hide({ top: '+=100' }, 500);
+
+
+                enemy_died = true;
+
+
+            }, 1000);
+
+
+            $('#sound_asound_alarmlarm_voice').remove();
+            $('#sound_alarm_voice').remove();
+
+            clearInterval(timer_alarm_sound);
+            clearInterval(enemy_walking);
+            $('#enemy').addClass('soldier_died');
+
+
+
+        } else if (enemy_current_x == enemy_final_x && enemy_current_y == enemy_final_y) {
+
+            randomWalking();
+
+
+        } else {
+            var enemy_next_x = enemy_current_x;
+            var enemy_next_y = enemy_current_y;
+
+            if (enemy_current_x < enemy_final_x) {
+                enemy_next_x += walking_speed;
+            } else if (enemy_current_x > enemy_final_x) {
+                enemy_next_x -= walking_speed;
+            }
+
+            if (enemy_current_y < enemy_final_y) {
+                enemy_next_y += walking_speed;
+            } else if (enemy_current_y > enemy_final_y) {
+                enemy_next_y -= walking_speed;
+            }
+
+            $('#enemy').css({
+                'left': enemy_next_x + 'px',
+                'top': enemy_next_y + 'px',
+            });
+        }
+
+
+    }, 5);
+
 }
 
 function endWalking() {
@@ -720,7 +836,7 @@ function endWalking() {
     }
 
     if (building_found) {
-        village_walking = true;
+        //village_walking = true;
 
         setTimeout(function () {
             $('#paper').show();
@@ -769,34 +885,32 @@ function onlyUnique(value, index, self) {
 
 function alarm_loop() {
 
+    if (!enemy_died) {
 
-    $('body').css('background', 'black');
 
-
-    $('#land').animate({
-        opacity: 0.9
-    }, 200, function () {
-
-        $('body').css('background', 'red');
+        $('body').css('background', 'black');
 
 
         $('#land').animate({
-            opacity: 1
+            opacity: 0.9
         }, 200, function () {
-            alarm_loop();
+
+            $('body').css('background', 'red');
+
+
+            $('#land').animate({
+                opacity: 1
+            }, 200, function () {
+                alarm_loop();
+            });
+
         });
-
-    });
+    }
 
 }
 
 
 
-if (is_alarm) {
-
-
-    startWalking();
-}
 
 
 window.onload = function () {
