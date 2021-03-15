@@ -133,6 +133,7 @@ button:focus{
 
 .soldier_walking {
     background-image: url('img/villager_walking2.gif');
+    z-index:4;
 }
 
 .box{

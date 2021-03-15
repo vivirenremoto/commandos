@@ -7,17 +7,12 @@ if (document.location.href.indexOf('en.html') > -1) {
 
 var is_loaded = false;
 var village_walking = false;
-//var enemy_walking = false;
 var timer_alarm_sound;
 var enemy_died = false;
 var final_x = 0;
 var final_y = 0;
 var current_x = 0;
 var current_y = 0;
-//var enemy_final_x = 0;
-//var enemy_final_y = 0;
-//var enemy_current_x = 0;
-//var enemy_current_y = 0;
 var trees_desktop = 20;
 var trees_mobile = 10;
 var building_width = 203;
@@ -60,9 +55,10 @@ var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
 
 var enemies_total = 2;
 var enemies_array = [];
-
+var enemy_distance = 50;
 
 if (is_mobile) {
+    enemy_distance = 25;
     eagle_speed = eagle_speed / 2;
 
 
@@ -398,7 +394,12 @@ function init() {
         for (var i = 1; i <= enemies_total; i++) {
 
 
-            var zone_enemy = zones[4 - i];
+            if (is_mobile) {
+                var zone_enemy = { start_x: 0, end_x: screen_width, start_y: 0, end_y: screen_height };
+            } else {
+                var zone_enemy = zones[4 - i];
+
+            }
 
             var enemy_start_x = randomNumber(zone_enemy.start_x, zone_enemy.end_x) - parseInt(villager_width / 2);
             var enemy_start_y = randomNumber(zone_enemy.start_y, zone_enemy.end_y) - parseInt(villager_height / 2);
@@ -645,7 +646,7 @@ function startWalking() {
 
             if (is_mobile) {
                 $('#alarm1').css('left', (screen_width - 100) / 2).show().animate({
-                    bottom: '+=72'
+                    bottom: '+=85'
                 }, 1000);
 
             } else {
@@ -782,12 +783,11 @@ function randomWalking(index) {
 function enemyCheck(index) {
 
 
-    var diff_position = 50;
+
 
 
 
     var current_enemy = enemies_array[index - 1];
-    //var enemy_walking = current_enemy.walking;
 
 
     enemy_current_x = current_enemy.current_x;
@@ -807,7 +807,7 @@ function enemyCheck(index) {
     }
 
 
-    var enemy_found = numberBetween(enemy_current_x, current_x, diff_position) && numberBetween(enemy_current_y, current_y, diff_position);
+    var enemy_found = numberBetween(enemy_current_x, current_x, enemy_distance) && numberBetween(enemy_current_y, current_y, enemy_distance);
 
 
 
@@ -818,7 +818,7 @@ function enemyCheck(index) {
 
 
 
-    if ($('#villager').hasClass(villager_walking_class) && enemy_found) {
+    if (enemy_found) {
 
 
         document.getElementById('sound_enemy_died').play();
