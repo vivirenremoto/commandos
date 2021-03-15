@@ -322,7 +322,7 @@ BUTTON:HOVER {
 
     #land {background-size:auto;}
 
-    #play{left:0;margin-left:0;width:100%;top:auto;bottom:0;}
+    #play{left:0;margin-left:0;width:100%;top:auto;bottom:0;display:none;}
 
 }
 
