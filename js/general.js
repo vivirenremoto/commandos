@@ -383,7 +383,7 @@ function init() {
 
 
             if (is_mobile) {
-                var zone_enemy = { start_x: 0, end_x: screen_width, start_y: 0, end_y: screen_height };
+                var zone_enemy = { start_x: villager_width, end_x: screen_width - villager_width, start_y: villager_height, end_y: screen_height - villager_height };
             } else {
                 var zone_enemy = zones[4 - i];
 
