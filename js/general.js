@@ -241,9 +241,7 @@ function init() {
     });
 
     // mover aldeano
-    $('body').click(function (e) {
-
-
+    $('#canvas').click(function (e) {
 
 
         if (!is_loaded) return;
@@ -284,14 +282,21 @@ function init() {
 
             }
 
+            //return;
         }
 
 
 
         if ($('#paper').is(':visible')) return;
 
+        final_x = e.offsetX - parseInt(villager_width / 2);
+        final_y = e.offsetY - parseInt(villager_height / 2);
 
 
+        //final_x = e.offsetX;
+        //final_y = e.offsetY;
+
+        startWalking();
 
 
         if (!is_test) {
@@ -319,17 +324,10 @@ function init() {
 
 
 
-        if (e.offsetX < 60) return;
 
 
-        final_x = e.offsetX - parseInt(villager_width / 2);
-        final_y = e.offsetY - parseInt(villager_height / 2);
-
-
-        startWalking();
-
+        //}
     });
-
 
 
     // centrar aldeano
@@ -386,22 +384,6 @@ function init() {
         $('#enemy').css('left', enemy_start_x).css('top', enemy_start_y).show();
 
 
-
-
-        $('#enemy').click(function (e) {
-
-            if (enemy_died) return;
-
-
-
-            final_x = $(this).offset().left - parseInt(villager_width / 2);
-            final_y = $(this).offset().top - parseInt(villager_height / 2);
-
-            console.log(final_x);
-
-
-            startWalking();
-        });
 
 
     } else {
@@ -759,8 +741,6 @@ function randomWalking() {
             setTimeout(function () {
                 document.getElementById('sound_won').play();
             }, 2000);
-
-            endWalking();
 
             document.getElementById('sound_enemy_died').play();
             document.getElementById('sound_alarm').pause();

@@ -219,7 +219,6 @@ button:focus{
     image-rendering: pixelated;
 }
 
-/*
 #canvas {
     z-index: 4;
     width: 100%;
@@ -228,7 +227,6 @@ button:focus{
     top: 0;
     left: 0;
 }
-*/
 
 #paper {
     max-width: 100%;
