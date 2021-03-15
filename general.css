@@ -140,7 +140,7 @@ button:focus{
 }
 
 .soldier_spot {
-    border:1px red solid;
+    border:2px red dashed;
 }
 
 .box{
