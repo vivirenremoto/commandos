@@ -55,6 +55,9 @@ LI, LI A{
     margin-left:-30px;
 }
 
+#content_finish{margin-top: -40px;}
+#content_finish h2{text-align:left !important;}
+
 button:focus{
     outline: none;
 }

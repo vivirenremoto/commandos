@@ -69,14 +69,11 @@ if (is_mobile) {
     var buildings_help = ['tools', 'mis cosas', 'experiencia', 'skills'];
 
 
-} else {
-    enemies_total = 3;
 }
 
 
 
 
-enemies_total = 1;
 
 
 
@@ -885,7 +882,7 @@ function enemyCheck(index) {
 
                     //current_building = 'thanks';
                     //document.getElementById('sound_' + current_building).play();
-                }, 1000);
+                }, 800);
 
 
 
