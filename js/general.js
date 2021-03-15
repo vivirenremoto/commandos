@@ -811,6 +811,7 @@ function enemyCheck(index) {
     if ($('#villager').hasClass(villager_walking_class) && enemy_found) {
 
 
+        document.getElementById('sound_enemy_died').currentTime = 0;
         document.getElementById('sound_enemy_died').play();
 
 
