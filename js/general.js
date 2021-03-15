@@ -383,14 +383,14 @@ function init() {
 
 
             if (is_mobile) {
-                var zone_enemy = { start_x: villager_width, end_x: screen_width - villager_width, start_y: villager_height, end_y: screen_height - villager_height };
+                var zone_enemy = { start_x: 0, end_x: screen_width - villager_width, start_y: 0, end_y: screen_height - villager_height };
             } else {
                 var zone_enemy = zones[4 - i];
 
             }
 
-            var enemy_start_x = randomNumber(zone_enemy.start_x, zone_enemy.end_x) - parseInt(villager_width / 2);
-            var enemy_start_y = randomNumber(zone_enemy.start_y, zone_enemy.end_y) - parseInt(villager_height / 2);
+            var enemy_start_x = randomNumber(zone_enemy.start_x, zone_enemy.end_x);
+            var enemy_start_y = randomNumber(zone_enemy.start_y, zone_enemy.end_y);
 
             enemies_array.push({ index: i, currenty_x: enemy_start_x, currenty_y: enemy_start_y, final_x: 0, final_y: 0, walking: false, died: false });
 
