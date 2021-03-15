@@ -584,53 +584,59 @@ function flyEagle() {
     document.getElementById('sound_avion').play();
 
 
-    var eagle_rand = Math.floor(Math.random() * 2);
-    var eagle_final_x;
-    var eagle_final_y;
-
-
-    if (is_mobile) {
-
-        eagle_start_x = screen_width;
-        eagle_start_y = screen_height;
-
-        eagle_final_x = screen_width * -1;
-        eagle_final_y = (screen_height * -1) + 311;
-    } else {
-
-        eagle_start_x = screen_width;
-        eagle_start_y = screen_height - (eagle_height / 2);
-
-        eagle_final_x = screen_width * -1;
-        eagle_final_y = screen_height * -1;
-    }
-
-
-    $("#eagle").css('left', eagle_start_x).css('top', eagle_start_y).show();
-
-    $("#eagle").animate({
-        left: eagle_final_x + 'px',
-        top: eagle_final_y + 'px'
-    },
-        eagle_speed, 'linear', function () {
-            $("#eagle").remove();
-
-
-
-
-
-
-        });
-
-
-
-
-
     setTimeout(function () {
 
-        flyBoxes();
 
-    }, eagle_speed / 4);
+        var eagle_rand = Math.floor(Math.random() * 2);
+        var eagle_final_x;
+        var eagle_final_y;
+
+
+        if (is_mobile) {
+
+            eagle_start_x = screen_width;
+            eagle_start_y = screen_height;
+
+            eagle_final_x = screen_width * -1;
+            eagle_final_y = (screen_height * -1) + 311;
+        } else {
+
+            eagle_start_x = screen_width;
+            eagle_start_y = screen_height - (eagle_height / 2);
+
+            eagle_final_x = screen_width * -1;
+            eagle_final_y = screen_height * -1;
+        }
+
+
+        $("#eagle").css('left', eagle_start_x).css('top', eagle_start_y).show();
+
+        $("#eagle").animate({
+            left: eagle_final_x + 'px',
+            top: eagle_final_y + 'px'
+        },
+            eagle_speed, 'linear', function () {
+                $("#eagle").remove();
+
+
+
+
+
+
+            });
+
+
+
+
+
+        setTimeout(function () {
+
+            flyBoxes();
+
+        }, eagle_speed / 4);
+
+
+    }, 1000);
 }
 
 
