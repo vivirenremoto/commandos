@@ -53,9 +53,11 @@ var buildings = ['barracks', 'blacksmith', 'university', 'house'];
 var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
 
 
-var enemies_total = 2;
+var enemies_total = 4;
 var enemies_array = [];
 var enemy_distance = 50;
+var timer_time = false;
+var current_time = 0;
 
 if (is_mobile) {
     enemy_distance = 25;
@@ -70,6 +72,11 @@ if (is_mobile) {
 } else {
     enemies_total = 3;
 }
+
+
+
+
+enemies_total = 1;
 
 
 
@@ -255,7 +262,9 @@ function init() {
 
                 alarm_music_start = true;
 
-
+                timer_time = setInterval(function () {
+                    current_time++;
+                }, 1000);
 
 
 
@@ -834,6 +843,9 @@ function enemyCheck(index) {
         if ($('.soldier_walking').length == 0) {
 
 
+            clearInterval(timer_time);
+
+
 
             setTimeout(function () {
 
@@ -855,6 +867,10 @@ function enemyCheck(index) {
                 setTimeout(function () {
                     document.getElementById('sound_won').play();
 
+                    current_time = format_time(current_time);
+
+
+                    $('#time').html(current_time);
 
                     $('body').css('background', 'black');
 
@@ -863,7 +879,7 @@ function enemyCheck(index) {
                     $('#paper .pages').hide();
                     $('#play').hide();
                     $('#lang').hide();
-                    $('#content_thanks').show();
+                    $('#content_finish').show();
                     $('#land').addClass('blur');
                     $('#close').hide();
 
@@ -1035,7 +1051,46 @@ function alarm_loop() {
 }
 
 
+function format_time(time) {
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = ~~time % 60;
 
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+
+
+function share() {
+    var share_title = document.title;
+    var share_url = document.location.href;//.split('?')[0];
+
+    if (current_time) {
+        if (document.location.href.indexOf('en.html') > -1) {
+            share_title += ' - Beat my time: ';
+        } else {
+            share_title += ' - Supera mi tiempo: ';
+        }
+        share_title += current_time;
+    }
+
+    if (navigator.share) {
+        navigator.share({
+            title: share_title,
+            url: share_url
+        });
+
+    } else {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(share_title) + '&tw_p=tweetbutton&url=' + encodeURIComponent(share_url));
+    }
+}
 
 
 window.onload = function () {

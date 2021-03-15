@@ -288,6 +288,10 @@ BUTTON:HOVER {
 
 
 
+.button{display:block;margin-top:15px;border:5px black solid;font-weight:bold;font-size:25px;color:black;text-decoration:none;padding:10px;padding: 10px;
+    width: 200px;
+    text-align: center;}
+
 .alarm{
     opacity:0.9;
     display:none;
