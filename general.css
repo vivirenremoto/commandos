@@ -209,7 +209,7 @@ button:focus{
 
 
 .soldier_died {
-    background-size: auto 75px;
+    background-size: auto 65px;
     background-image: url('img/soldier_died.png') !important;
 }
 
