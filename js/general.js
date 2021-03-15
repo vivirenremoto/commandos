@@ -1054,12 +1054,13 @@ function share() {
     var share_url = document.location.href;//.split('?')[0];
 
     if (current_time) {
+        share_title += ' 🔥 ' + current_time + ' ';
+
         if (document.location.href.indexOf('en.html') > -1) {
-            share_title += ' - Beat my time: ';
+            share_title += 'Beat my time!';
         } else {
-            share_title += ' - Supera mi tiempo: ';
+            share_title += '¡Supera mi tiempo! ';
         }
-        share_title += current_time;
     }
 
     if (navigator.share) {
