@@ -876,8 +876,7 @@ function enemyCheck(index) {
             }, 1000);
 
 
-            $('#sound_alarm').remove();
-            $('#sound_alarm_voice').remove();
+
 
             clearInterval(timer_alarm_sound);
 
