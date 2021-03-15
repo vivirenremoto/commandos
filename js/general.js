@@ -1,9 +1,6 @@
 // iniciar variables
 
-if (document.location.href.indexOf('en.html') > -1) {
 
-    var buildings_help = ['skills', 'tools', 'experience', 'stuff'];
-}
 
 var is_loaded = false;
 var village_walking = false;
@@ -49,9 +46,6 @@ var is_alarm = document.location.href.indexOf('alarm') > -1;
 var villager_width = $('#villager').width();
 var villager_height = $('#villager').height();
 
-var buildings = ['barracks', 'blacksmith', 'university', 'house'];
-var buildings_help = ['skills', 'tools', 'experiencia', 'mis cosas'];
-
 
 var enemies_total = 4;
 var enemies_array = [];
@@ -60,16 +54,28 @@ var timer_time = false;
 var current_time = 0;
 var alarm_started = false;
 
+
+
+if (document.location.href.indexOf('en.html') == -1) {
+
+    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
+    var buildings_help = ['tools', 'mis cosas', 'experiencia', 'skills'];
+
+} else {
+    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
+    var buildings_help = ['tools', 'stuff', 'experience', 'skills'];
+
+}
+
+
 if (is_mobile) {
     enemy_distance = 25;
     eagle_speed = eagle_speed / 2;
 
 
 
-    var buildings = ['blacksmith', 'house', 'university', 'barracks'];
-    var buildings_help = ['tools', 'mis cosas', 'experiencia', 'skills'];
-
-
+    buildings.reverse();
+    buildings_help.reverse();
 }
 
 if (is_test) {
