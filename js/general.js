@@ -58,6 +58,7 @@ var enemies_array = [];
 var enemy_distance = 50;
 var timer_time = false;
 var current_time = 0;
+var alarm_started = false;
 
 if (is_mobile) {
     enemy_distance = 25;
@@ -71,6 +72,9 @@ if (is_mobile) {
 
 }
 
+if (is_test) {
+    enemies_total = 1;
+}
 
 
 
@@ -163,8 +167,8 @@ function init() {
     // arrow controls
     document.onkeydown = function (e) {
 
-        if (is_alarm) return;
 
+        startAlarmMode();
 
 
         if (e.which == 13) {
@@ -219,7 +223,6 @@ function init() {
 
     document.onkeyup = function (e) {
 
-        if (is_alarm) return;
 
 
         if (latest_key.includes(13)) {
@@ -259,21 +262,10 @@ function init() {
 
                 alarm_music_start = true;
 
-                timer_time = setInterval(function () {
-                    current_time++;
-                }, 1000);
 
 
 
-                for (var i = 1; i <= enemies_total; i++) {
-                    $('#enemy' + i).addClass('soldier_walking');
-
-                    randomWalking(i);
-
-
-                }
-
-
+                startAlarmMode();
 
 
 
@@ -305,34 +297,31 @@ function init() {
         final_y = e.offsetY - parseInt(villager_height / 2);
 
 
-        //final_x = e.offsetX;
-        //final_y = e.offsetY;
-
         startWalking();
 
 
-        if (!is_test) {
-
-            if (!is_alarm) {
 
 
+        if (!is_alarm) {
 
 
-                var found = false;
-                while (!found) {
-                    var i = randomNumber(1, 3);
-                    if (villager_voice != i) {
-                        found = true;
-                        villager_voice = i;
-                    }
-                    i++;
+
+
+            var found = false;
+            while (!found) {
+                var i = randomNumber(1, 3);
+                if (villager_voice != i) {
+                    found = true;
+                    villager_voice = i;
                 }
-
-                document.getElementById('villager_talk' + villager_voice).play();
-
-
+                i++;
             }
+
+            document.getElementById('villager_talk' + villager_voice).play();
+
+
         }
+
 
 
 
@@ -341,14 +330,6 @@ function init() {
         //}
     });
 
-
-    // centrar aldeano
-    current_x = screen_width / 2;
-    current_y = screen_height / 2;
-
-    $("#villager")
-        .css('left', current_x + 'px')
-        .css('top', current_y + 'px');
 
 
 
@@ -379,7 +360,8 @@ function init() {
 
 
 
-
+    current_x = zone_x;
+    current_y = zone_y;
 
 
     $('#villager').css('left', zone_x).css('top', zone_y);
@@ -392,7 +374,7 @@ function init() {
 
         var html_enemies = '';
         for (var i = 1; i <= enemies_total; i++) {
-            html_enemies += '<div id="enemy' + i + '" class="enemy"></div>';
+            html_enemies += '<div id="enemy' + i + '" class="enemy soldier_spot"></div>';
         }
         $('#enemies').html(html_enemies);
 
@@ -640,6 +622,8 @@ function startWalking() {
         music_start = true;
 
 
+        $('#tooltip').remove();
+        $('.enemy').removeClass('soldier_spot');
 
 
 
@@ -824,7 +808,7 @@ function enemyCheck(index) {
 
 
 
-    if (enemy_found) {
+    if ($('#villager').hasClass(villager_walking_class) && enemy_found) {
 
 
         document.getElementById('sound_enemy_died').play();
@@ -1089,6 +1073,30 @@ function share() {
     }
 }
 
+
+function startAlarmMode() {
+
+    if (alarm_started) return;
+
+
+    alarm_started = true;
+
+    timer_time = setInterval(function () {
+        current_time++;
+    }, 1000);
+
+
+
+    for (var i = 1; i <= enemies_total; i++) {
+        $('#enemy' + i).addClass('soldier_walking');
+
+        randomWalking(i);
+
+
+    }
+
+
+}
 
 window.onload = function () {
 

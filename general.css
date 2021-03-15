@@ -85,7 +85,7 @@ button:focus{
     background:white;
     position:fixed;
     left:50%;
-    top:0;
+    bottom:0;
     margin-left:-90px;
     text-align:center;
     font-family: Arial;
@@ -137,6 +137,10 @@ button:focus{
 .soldier_walking {
     background-image: url('img/villager_walking2.gif');
     z-index:4;
+}
+
+.soldier_spot {
+    border:1px red solid;
 }
 
 .box{
@@ -316,7 +320,7 @@ BUTTON:HOVER {
 
     #land {background-size:auto;}
 
-    #play{top:auto;bottom:0;left:0;margin-left:0;width:100%;}
+    #play{left:0;margin-left:0;width:100%;}
 
 }
 
@@ -336,7 +340,7 @@ BUTTON:HOVER {
         image-rendering: crisp-edges;
     }
 
-    #villager.soldier {
+    .enemy {
         image-rendering: crisp-edges;
     }
 
