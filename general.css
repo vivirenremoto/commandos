@@ -118,6 +118,7 @@ button:focus{
 }
 
 #enemy {
+    cursor: url('img/cuchillo2.cur'), auto;
     display:none;
     background-image: url('img/villager_stopped2.gif') !important;
     background-repeat:no-repeat;
@@ -218,6 +219,7 @@ button:focus{
     image-rendering: pixelated;
 }
 
+/*
 #canvas {
     z-index: 4;
     width: 100%;
@@ -226,6 +228,7 @@ button:focus{
     top: 0;
     left: 0;
 }
+*/
 
 #paper {
     max-width: 100%;
