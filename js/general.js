@@ -418,9 +418,9 @@ function init() {
 
 
 
-
-    $('#play').delay(1000).fadeIn('slow');
-
+    if (!is_mobile) {
+        $('#play').delay(1000).fadeIn('slow');
+    }
 
 }
 
