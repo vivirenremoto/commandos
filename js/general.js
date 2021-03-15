@@ -418,9 +418,8 @@ function init() {
 
 
 
-    if (!is_mobile) {
-        $('#play').delay(1000).fadeIn('slow');
-    }
+    $('#play').delay(1000).fadeIn('slow');
+
 
 }
 
