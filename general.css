@@ -306,9 +306,9 @@ BUTTON:HOVER {
     display:none;
     background:url('img/alarm2.gif');
     position:fixed;
-    bottom:-98px;
+    bottom:0;
     width:100px;/*150px;*/
-    height:98px;/*147px;*/
+    height:0;/*147px;*/
     z-index:1;
     background-size:cover;
 }

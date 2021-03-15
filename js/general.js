@@ -642,15 +642,15 @@ function startWalking() {
 
             if (is_mobile) {
                 $('#alarm1').css('left', (screen_width - 100) / 2).show().animate({
-                    bottom: '+=85'
+                    height: 98
                 }, 1000);
 
             } else {
                 $('#alarm1').css('left', '15%').show().animate({
-                    bottom: '+=72'
+                    height: 98
                 }, 1000);
                 $('#alarm2').css('right', '15%').show().animate({
-                    bottom: '+=72'
+                    height: 98
                 }, 1000);
             }
 
