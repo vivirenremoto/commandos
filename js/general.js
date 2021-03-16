@@ -116,7 +116,7 @@ if (is_mobile) {
             start_x: 0,
             end_x: screen_width,
             start_y: (screen_height / 4) * 3,
-            end_y: ((screen_height / 4) * 4) - 50
+            end_y: ((screen_height / 4) * 4)
         },
 
     ];
