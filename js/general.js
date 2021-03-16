@@ -92,7 +92,7 @@ if (is_test) {
 if (is_mobile) {
     var zones = [
         {
-            start_x: 0,
+            start_x: 60,
             end_x: screen_width,
             start_y: 0,
             end_y: (screen_height / 4) * 1
