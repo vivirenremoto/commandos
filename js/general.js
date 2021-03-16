@@ -1067,7 +1067,7 @@ function format_time(time) {
 
 function share() {
     var share_title = document.title;
-    var share_url = document.location.href;//.split('?')[0];
+    var share_url = document.location.href.split('?')[0];
 
     if (current_time) {
         share_title += ' 🔥 ' + current_time + ' ';
